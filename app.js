@@ -11,7 +11,7 @@ function loadFormData() {
         try {
             const data = JSON.parse(saved);
             Object.keys(data).forEach(key => {
-                const field = document.getElementById(key);
+                const field = document.getElementById(key) || document.querySelector(`[name="${key}"]`);
                 if (field) {
                     if (field.type === 'radio') {
                         document.querySelector(`input[name="${key}"][value="${data[key]}"]`)?.checked = true;

@@ -149,22 +149,18 @@ function populateSchoolDropdowns() {
     }
 }
 
-// Function to populate state dropdowns
 function populateStateDropdowns() {
-    const stateSelects = ['stateOfOrigin', 'stateOfResidence'];
-    
-    stateSelects.forEach(selectId => {
-        const select = document.getElementById(selectId);
-        nigerianStates.sort().forEach(state => {
+    const select = document.getElementById('stateOfOrigin');
+    if (select) {
+        nigerianStates.forEach(state => {
             const option = document.createElement('option');
             option.value = state;
             option.textContent = state;
             select.appendChild(option);
         });
-    });
+    }
 }
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     populateSchoolDropdowns();
     populateStateDropdowns();
