@@ -7,13 +7,27 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .border-primary { border-color: #FF2E2E; }
-        .text-primary { color: #FF2E2E; }
-        .bg-primary { background-color: #FF2E2E; }
-        .focus\:ring-primary:focus { ring-color: #FF2E2E; }
-        .focus\:border-primary:focus { border-color: #FF2E2E; }
-        .hover\:bg-dark:hover { background-color: #cc2424; }
-        .text-dark { color: #1f2937; }
+        :root {
+            --primary: #FF2E2E;
+            --primary-dark: #cc2424;
+            --secondary: #1f2937;
+            --light: #f8f9fa;
+            --success: #28a745;
+        }
+        .border-primary { border-color: var(--primary); }
+        .text-primary { color: var(--primary); }
+        .bg-primary { background-color: var(--primary); }
+        .bg-primary-dark { background-color: var(--primary-dark); }
+        .focus\:ring-primary:focus { ring-color: var(--primary); }
+        .focus\:border-primary:focus { border-color: var(--primary); }
+        .hover\:bg-primary-dark:hover { background-color: var(--primary-dark); }
+        .text-dark { color: var(--secondary); }
+        .bg-light { background-color: var(--light); }
+        .card-shadow { box-shadow: 0 10px 40px rgba(255, 46, 46, 0.15); }
+        .input-focus:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255, 46, 46, 0.2); }
+        .preview-img { max-height: 120px; object-fit: contain; }
+        .confirmation-card { background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -61,7 +75,7 @@
                     <div class="space-y-2">
                         <label class="block text-sm font-medium text-gray-700">Passport Photo *</label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                            <input type="file" name="passportPhoto" accept="image/jpeg,image/png,image/jpg" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" id="passportInput">
+                            <input type="file" name="passportPhoto" accept="image/jpeg,image/png,image/jpg" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent input-focus" id="passportInput" onchange="previewPassport(this)">
                             <p class="text-xs text-gray-500 mt-1">JPEG/PNG only, max 5MB</p>
                         </div>
                         <div id="passportPreview" class="mt-2 flex justify-center"></div>
@@ -134,10 +148,62 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-dark transition-all duration-300 shadow-lg hover:shadow-xl">
-                    <i class="fas fa-paper-plane mr-2"></i>Submit Registration
+                <button type="button" id="reviewBtn" class="w-full px-6 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl card-shadow">
+                    <i class="fas fa-check-circle mr-2"></i>Review & Confirm Submission
                 </button>
             </form>
+
+            <div id="confirmationView" class="bg-white rounded-xl shadow-2xl p-8 space-y-6 hidden">
+                <div class="text-center">
+                    <div class="bg-primary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-double text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark mb-2">Confirm Your Registration</h2>
+                    <p class="text-gray-600">Please verify all details are correct before final submission</p>
+                </div>
+
+                <div class="bg-light rounded-lg p-6 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div><strong>Surname:</strong> <span id="cf-surname"></span></div>
+                        <div><strong>First Name:</strong> <span id="cf-firstName"></span></div>
+                        <div><strong>Middle Name:</strong> <span id="cf-middleName"></span></div>
+                        <div><strong>Date of Birth:</strong> <span id="cf-dateOfBirth"></span></div>
+                        <div><strong>Gender:</strong> <span id="cf-gender"></span></div>
+                        <div><strong>NIN:</strong> <span id="cf-nin"></span></div>
+                        <div><strong>Disability:</strong> <span id="cf-disability"></span></div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div><strong>State of Origin:</strong> <span id="cf-stateOfOrigin"></span></div>
+                        <div><strong>LGA of Origin:</strong> <span id="cf-lgaOfOrigin"></span></div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div><strong>State of Residence:</strong> <span id="cf-stateOfResidence"></span></div>
+                        <div><strong>LGA of Residence:</strong> <span id="cf-lgaOfResidence"></span></div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div><strong>Parent's Name:</strong> <span id="cf-parentsName"></span></div>
+                        <div><strong>Phone Number:</strong> <span id="cf-phoneNumber"></span></div>
+                        <div><strong>Email:</strong> <span id="cf-email"></span></div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div><strong>North East School:</strong> <span id="cf-northEast"></span></div>
+                        <div><strong>North Central School:</strong> <span id="cf-northCentral"></span></div>
+                        <div><strong>North West School:</strong> <span id="cf-northWest"></span></div>
+                        <div><strong>South East School:</strong> <span id="cf-southEast"></span></div>
+                        <div><strong>South West School:</strong> <span id="cf-southWest"></span></div>
+                        <div><strong>South South School:</strong> <span id="cf-southSouth"></span></div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div><strong>Passport Photo:</strong></div>
+                        <div id="cf-passportPhoto" class="mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button type="button" id="editBtn" class="flex-1 px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-light transition-all">Edit Details</button>
+                    <button type="submit" form="registrationForm" class="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all">Confirm & Submit</button>
+                </div>
+            </div>
 
             <div class="mt-8 text-center">
                 <p class="text-gray-600 text-sm">
@@ -247,16 +313,57 @@
             if (!input.files || !input.files[0]) { preview.innerHTML = ''; return; }
             const file = input.files[0];
             if (file.size > 5*1024*1024) { alert('File must be less than 5MB'); input.value = ''; preview.innerHTML = ''; return; }
-            preview.innerHTML = '<img src="' + URL.createObjectURL(file) + '" class="max-h-32 rounded-lg shadow-md">';
+            preview.innerHTML = '<img src="' + URL.createObjectURL(file) + '" class="preview-img rounded-lg border-2 border-gray-200">';
         }
 
-        document.getElementById('registrationForm').addEventListener('submit', e => {
+        function showConfirmation() {
+            const form = document.getElementById('registrationForm');
             const required = ['surname','firstName','dateOfBirth','nin','stateOfOrigin','lgaOfOrigin','stateOfResidence','lgaOfResidence','parentsName','phoneNumber','email'];
             let valid = true;
             required.forEach(id => { const el = document.getElementById(id) || document.querySelector('[name="'+id+'"]'); if (el && !el.value) valid = false; });
             if (!document.querySelector('input[name="gender"]:checked')) valid = false;
-            if (!valid) { e.preventDefault(); alert('Please fill all required fields.'); }
-        });
+            if (!valid) { alert('Please fill all required fields.'); return; }
+
+            document.getElementById('cf-surname').textContent = document.getElementById('surname').value;
+            document.getElementById('cf-firstName').textContent = document.getElementById('firstName').value;
+            document.getElementById('cf-middleName').textContent = document.getElementById('middleName').value || '-';
+            document.getElementById('cf-dateOfBirth').textContent = document.getElementById('dateOfBirth').value;
+            document.getElementById('cf-gender').textContent = document.querySelector('input[name="gender"]:checked').value;
+            document.getElementById('cf-nin').textContent = document.getElementById('nin').value;
+            document.getElementById('cf-disability').textContent = document.getElementById('disability').value || '-';
+            document.getElementById('cf-stateOfOrigin').textContent = document.getElementById('stateOfOrigin').value;
+            document.getElementById('cf-lgaOfOrigin').textContent = document.getElementById('lgaOfOrigin').value;
+            document.getElementById('cf-stateOfResidence').textContent = document.getElementById('stateOfResidence').value;
+            document.getElementById('cf-lgaOfResidence').textContent = document.getElementById('lgaOfResidence').value;
+            document.getElementById('cf-parentsName').textContent = document.getElementById('parentsName').value;
+            document.getElementById('cf-phoneNumber').textContent = document.getElementById('phoneNumber').value;
+            document.getElementById('cf-email').textContent = document.getElementById('email').value;
+            document.getElementById('cf-northEast').textContent = document.getElementById('northEast').value;
+            document.getElementById('cf-northCentral').textContent = document.getElementById('northCentral').value;
+            document.getElementById('cf-northWest').textContent = document.getElementById('northWest').value;
+            document.getElementById('cf-southEast').textContent = document.getElementById('southEast').value;
+            document.getElementById('cf-southWest').textContent = document.getElementById('southWest').value;
+            document.getElementById('cf-southSouth').textContent = document.getElementById('southSouth').value;
+
+            const passportPreview = document.getElementById('cf-passportPhoto');
+            const passportImg = document.getElementById('passportPreview').querySelector('img');
+            if (passportImg) {
+                passportPreview.innerHTML = '<img src="' + passportImg.src + '" class="preview-img rounded-lg border-2 border-gray-200">';
+            } else {
+                passportPreview.textContent = 'No passport photo uploaded';
+            }
+
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('confirmationView').classList.remove('hidden');
+        }
+
+        function editDetails() {
+            document.getElementById('confirmationView').classList.add('hidden');
+            document.getElementById('registrationForm').classList.remove('hidden');
+        }
+
+        document.getElementById('reviewBtn').addEventListener('click', showConfirmation);
+        document.getElementById('editBtn').addEventListener('click', editDetails);
     </script>
 </body>
 </html>
