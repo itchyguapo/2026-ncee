@@ -3,7 +3,7 @@ const lgaData = [
   {"state": "Akwa Ibom", "lgas": ["Abak", "Eastern Obolo", "Eket", "Esit Eket", "Essien Udim", "Etim Ekpo", "Etinan", "Ibeno", "Ibesikpo Asutan", "Ibiono-Ibom", "Ikot Abasi", "Ika", "Ikono", "Ikot Ekpene", "Ini", "Mkpat-Enin", "Itu", "Mbo", "Nsit-Atai", "Nsit-Ibom", "Nsit-Ubium", "Obot Akara", "Okobo", "Onna", "Oron", "Udung-Uko", "Ukanafun", "Oruk Anam", "Uruan", "Urue-Offong/Oruko", "Uyo"]},
   {"state": "Anambra", "lgas": ["Aguata", "Anambra East", "Anaocha", "Awka North", "Anambra West", "Awka South", "Ayamelum", "Dunukofia", "Ekwusigo", "Idemili North", "Idemili South", "Ihiala", "Njikoka", "Nnewi North", "Nnewi South", "Ogbaru", "Onitsha North", "Onitsha South", "Orumba North", "Orumba South", "Oyi"]},
   {"state": "Ogun", "lgas": ["Abeokuta North", "Abeokuta South", "Ado-Odo/Ota", "Egbado North", "Ewekoro", "Egbado South", "Ijebu North", "Ijebu East", "Ifo", "Ijebu Ode", "Ijebu North East", "Imeko Afon", "Ikenne", "Ipokia", "Odeda", "Obafemi Owode", "Odogbolu", "Remo North", "Ogun Waterside", "Shagamu"]},
-  {"state": "Ondo", "lgos": ["Akoko North-East", "Akoko North-West", "Akoko South-West", "Akoko South-East", "Akure North", "Akure South", "Ese Odo", "Idanre", "Ifedore", "Ilaje", "Irele", "Ilejemeje", "Ijero", "Ikere", "Ile Oluji/Okeigbo", "Odigbo", "Okitipupa", "Ondo West", "Ose", "Ondo East", "Owo"]},
+  {"state": "Ondo", "lgas": ["Akoko North-East", "Akoko North-West", "Akoko South-West", "Akoko South-East", "Akure North", "Akure South", "Ese Odo", "Idanre", "Ifedore", "Ilaje", "Irele", "Ilejemeje", "Ijero", "Ikere", "Ile Oluji/Okeigbo", "Odigbo", "Okitipupa", "Ondo West", "Ose", "Ondo East", "Owo"]},
   {"state": "Rivers", "lgos": ["Abua/Odual", "Ahoada East", "Ahoada West", "Andoni", "Akuku-Toru", "Asari-Toru", "Bonny", "Degema", "Emuoha", "Eleme", "Ikwerre", "Etche", "Gokana", "Khana", "Obio/Akpor", "Ogba/Egbema/Ndoni", "Ogu/Bolo", "Okrika", "Omuma", "Opobo/Nkoro", "Oyigbo", "Port Harcourt", "Tai"]},
   {"state": "Bauchi", "lgos": ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"]},
   {"state": "Benue", "lgos": ["Agatu", "Apa", "Ado", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Oturkpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"]},
@@ -39,13 +39,16 @@ const lgaData = [
 ];
 
 function populateStateDropdowns() {
-    const select = document.getElementById('stateOfOrigin');
-    if (!select) return;
-    lgaData.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.state;
-        option.textContent = item.state;
-        select.appendChild(option);
+    const selects = ['stateOfOrigin', 'stateOfResidence'];
+    selects.forEach(selectId => {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        lgaData.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.state;
+            option.textContent = item.state;
+            select.appendChild(option);
+        });
     });
 }
 
