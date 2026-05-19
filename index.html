@@ -50,7 +50,11 @@
                 </div>
             </div>
 
-            <form class="bg-white rounded-xl shadow-2xl p-8 space-y-6" id="registrationForm" enctype="multipart/form-data">
+            <form id="registrationForm" 
+      action="https://formspree.io/f/xwvzpqab" 
+      method="POST" 
+      enctype="multipart/form-data"
+      class="bg-white rounded-xl shadow-2xl p-8 space-y-6">
                 <input type="hidden" name="form-name" value="ncee-registration-2026" />
                 <div class="space-y-6">
                     <h2 class="text-2xl font-bold text-dark border-b-2 border-primary pb-3 flex items-center">
@@ -367,50 +371,46 @@
             document.getElementById('registrationForm').classList.remove('hidden');
         }
 
-        async function submitForm() {
+        // ==================== BULLETPROOF SUBMISSION ====================
+        async function submitForm(e) {
+            if (e) e.preventDefault();
+
             const form = document.getElementById('registrationForm');
-            const submitBtn = event ? event.target : document.querySelector('#confirmationView button[type="button"]:last-of-type');
+            const submitBtn = document.querySelector('#confirmationView button:last-of-type');
             const errorMsg = document.getElementById('errorMessage');
-            
+
             if (submitBtn) {
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Submitting... Please wait';
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Submitting Registration...';
             }
             errorMsg.classList.add('hidden');
-
-            const formData = new FormData(form);
-            formData.append('form-name', 'ncee-registration-2026');
 
             try {
                 const response = await fetch('https://formspree.io/f/xwvzpqab', {
                     method: 'POST',
-                    body: formData
+                    body: new FormData(form)
                 });
 
                 if (response.ok) {
-                    alert('Registration submitted successfully!');
+                    alert('✅ Registration Submitted Successfully!\n\nThank you for registering with Medley Schools.');
                     form.reset();
+                    document.getElementById('passportPreview').innerHTML = '';
                     document.getElementById('confirmationView').classList.add('hidden');
                     document.getElementById('registrationForm').classList.remove('hidden');
-                    document.getElementById('passportPreview').innerHTML = '';
                 } else {
-                    throw new Error('Submission failed');
+                    throw new Error('Server responded with error');
                 }
-            } catch (error) {
-                errorMsg.textContent = 'Submission failed. Please try again.';
+            } catch (err) {
+                console.error(err);
+                errorMsg.textContent = '❌ Failed to submit. Please check your connection and try again.';
                 errorMsg.classList.remove('hidden');
             } finally {
                 if (submitBtn) {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Confirm & Submit';
+                    submitBtn.innerHTML = 'Confirm & Submit';
                 }
             }
         }
-
-        document.getElementById('registrationForm').addEventListener('submit', e => {
-            e.preventDefault();
-            submitForm();
-        });
     </script>
 </body>
 </html>
