@@ -401,21 +401,28 @@
             errorMsg.classList.add('hidden');
 
             try {
-                const response = await fetch('https://formspree.io/f/xwvzpqab', {
+                const response = await fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form)
                 });
 
-                if (response.ok) {
-                    document.getElementById('registrationForm').classList.add('hidden');
-                    document.getElementById('confirmationView').classList.add('hidden');
-                    document.getElementById('successMessage').classList.remove('hidden');
-                } else {
-                    throw new Error('Server responded with error');
+                if (!response.ok) {
+                    let errorMsgText;
+                    try {
+                        const errorData = await response.json();
+                        console.error('Formspree error:', errorData);
+                        errorMsgText = errorData?.error || `HTTP ${response.status}: ${response.statusText}`;
+                    } catch {
+                        errorMsgText = `HTTP ${response.status}: ${response.statusText}`;
+                    }
+                    throw new Error(errorMsgText);
                 }
+                document.getElementById('registrationForm').classList.add('hidden');
+                document.getElementById('confirmationView').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
             } catch (err) {
-                console.error(err);
-                errorMsg.textContent = '❌ Failed to submit. Please check your connection and try again.';
+                console.error('Submission error:', err);
+                errorMsg.textContent = '❌ Failed to submit: ' + err.message;
                 errorMsg.classList.remove('hidden');
             } finally {
                 if (submitBtn) {
