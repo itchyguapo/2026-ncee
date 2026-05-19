@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: https://itchyguapo.github.io/ncee-2026
+      url: https://itchyguapo.github.io/2026-ncee
     permissions:
       contents: read
       pages: write
