@@ -41,11 +41,42 @@ function populateLgas(stateName, lgaSelectId) {
     }
 }
 
+function populateSchoolsByZone(zone, selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    select.innerHTML = '<option value="">Select School *</option>';
+    if (SCHOOL_DATA[zone]) {
+        SCHOOL_DATA[zone].forEach(school => {
+            const option = document.createElement('option');
+            option.value = school;
+            option.textContent = school;
+            select.appendChild(option);
+        });
+    }
+}
+
+function getZoneFromState(stateName) {
+    return STATE_TO_ZONE[stateName] || null;
+}
+
+function populateAllSchoolDropdowns() {
+    const schoolSelects = ['northEast', 'northCentral', 'northWest', 'southEast', 'southSouth', 'southWest'];
+    schoolSelects.forEach(selectId => {
+        const select = document.getElementById(selectId);
+        if (select) {
+            select.innerHTML = '<option value="">Select School *</option>';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchLgaData();
+    populateAllSchoolDropdowns();
+    
     document.getElementById('stateOfOrigin')?.addEventListener('change', function() {
         populateLgas(this.value, 'lgaOfOrigin');
     });
+    
     document.getElementById('stateOfResidence')?.addEventListener('change', function() {
         populateLgas(this.value, 'lgaOfResidence');
     });
