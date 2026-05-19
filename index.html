@@ -320,17 +320,52 @@
             document.getElementById('stateOfOrigin').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfOrigin'));
             document.getElementById('stateOfResidence').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfResidence'));
             // Review & edit button handlers
-            document.getElementById('reviewBtn').addEventListener('click', showConfirmation);
+            const reviewBtn = document.getElementById('reviewBtn');
+            reviewBtn.addEventListener('click', showConfirmation);
+            reviewBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                showConfirmation();
+            });
             document.getElementById('editBtn').addEventListener('click', editDetails);
         });
 
         function showConfirmation() {
-            const form = document.getElementById('registrationForm');
-            const required = ['surname','firstName','dateOfBirth','nin','stateOfOrigin','lgaOfOrigin','stateOfResidence','lgaOfResidence','parentsName','phoneNumber','email'];
+            const requiredFields = [
+                'surname','firstName','dateOfBirth','nin',
+                'stateOfOrigin','lgaOfOrigin','stateOfResidence',
+                'lgaOfResidence','parentsName','phoneNumber','email',
+                'northEast','northCentral','northWest',
+                'southEast','southWest','southSouth'
+            ];
+
             let valid = true;
-            required.forEach(id => { const el = document.getElementById(id) || document.querySelector('[name="'+id+'"]'); if (el && !el.value) valid = false; });
-            if (!document.querySelector('input[name="gender"]:checked')) valid = false;
-            if (!valid) { alert('Please fill all required fields.'); return; }
+            let emptyFields = [];
+
+            requiredFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) {
+                    console.warn('Element not found:', id);
+                    valid = false;
+                    emptyFields.push(id + ' (element missing)');
+                } else if (!el.value || el.value.trim() === '') {
+                    console.warn('Empty field:', id);
+                    valid = false;
+                    emptyFields.push(id);
+                }
+            });
+
+            const genderChecked = document.querySelector('input[name="gender"]:checked');
+            if (!genderChecked) {
+                valid = false;
+                emptyFields.push('gender');
+            }
+
+            if (!valid) {
+                alert('Please fill in the following required fields:\n\n' + emptyFields.join('\n'));
+                return;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             document.getElementById('cf-surname').textContent = document.getElementById('surname').value;
             document.getElementById('cf-firstName').textContent = document.getElementById('firstName').value;
@@ -358,6 +393,7 @@
         }
 
         function editDetails() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             document.getElementById('confirmationView').classList.add('hidden');
             document.getElementById('registrationForm').classList.remove('hidden');
         }
