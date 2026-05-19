@@ -66,6 +66,14 @@ function validateForm() {
     const genderSelected = document.querySelector('input[name="gender"]:checked');
     if (!genderSelected) isValid = false;
     
+    const schoolZones = ['northEast', 'northCentral', 'northWest', 'southEast', 'southSouth', 'southWest'];
+    schoolZones.forEach(zone => {
+        const schoolSelect = document.getElementById(zone);
+        if (schoolSelect && !schoolSelect.value) {
+            isValid = false;
+        }
+    });
+    
     const email = document.getElementById('email');
     if (email?.value && !isValidEmail(email.value)) {
         isValid = false;
