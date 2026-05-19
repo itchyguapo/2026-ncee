@@ -17,7 +17,7 @@ permalink: /
                         <p class="text-gray-600 text-sm">Federal Government Colleges Selection</p>
                     </div>
                 </div>
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+                <div class="bg-yellow-100 border-l-4 border-yellow-400 p-3 rounded">
                     <p class="text-sm text-gray-700"><strong>IMPORTANT:</strong> Fill all entries in <strong>BLOCK letters</strong>. All submissions are <strong>FINAL</strong> and cannot be changed.</p>
                 </div>
             </div>

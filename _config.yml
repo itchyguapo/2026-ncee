@@ -1,0 +1,9 @@
+title: MEDELY Schools NCEE Registration 2026
+markdown: kramdown
+highlighter: rouge
+theme: minima
+kramdown:
+  parser:
+    gfm: true
+plugins:
+  - jekyll-feed

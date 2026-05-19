@@ -85,6 +85,26 @@ function clearForm() {
     }
 }
 
+function previewPassport(input) {
+    const preview = document.getElementById('passportPreview');
+    if (!preview || !input.files || !input.files[0]) {
+        preview.innerHTML = '';
+        return;
+    }
+    const file = input.files[0];
+    if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        input.value = '';
+        preview.innerHTML = '';
+        return;
+    }
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.className = 'max-h-32 rounded-lg shadow-md';
+    preview.innerHTML = '';
+    preview.appendChild(img);
+}
+
 document.getElementById('registrationForm')?.addEventListener('submit', function(e) {
     if (!validateForm()) {
         e.preventDefault();
