@@ -85,13 +85,36 @@
                         <div><input type="text" name="middleName" id="middleName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Middle Name"></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div><input type="date" name="dateOfBirth" id="dateOfBirth" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required></div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <select id="dobDay" name="dobDay" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Day *</option>
+                            </select>
+                            <select id="dobMonth" name="dobMonth" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Month *</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="dobYear" name="dobYear" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Year *</option>
+                            </select>
+                        </div>
                         <div class="flex gap-4 items-center">
                             <span class="text-gray-600 font-medium">Gender:</span>
                             <label class="flex items-center"><input type="radio" name="gender" value="MALE" required class="mr-1"> MALE</label>
                             <label class="flex items-center"><input type="radio" name="gender" value="FEMALE" required class="mr-1"> FEMALE</label>
                         </div>
                     </div>
+                    <input type="hidden" id="dateOfBirth" name="dateOfBirth">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div><input type="text" name="disability" id="disability" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Disability (Optional)"></div>
                         <div><input type="text" name="nin" id="nin" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="NIN *" required></div>
@@ -317,6 +340,29 @@
         document.addEventListener('DOMContentLoaded', () => {
             populateStates();
             populateSchools();
+
+            // Populate DOB dropdowns
+            const dobDay = document.getElementById('dobDay');
+            for (let d = 1; d <= 31; d++) {
+                const val = String(d).padStart(2, '0');
+                dobDay.add(new Option(val, val));
+            }
+            const dobYear = document.getElementById('dobYear');
+            for (let y = 2015; y >= 2005; y--) {
+                dobYear.add(new Option(y, y));
+            }
+
+            // Sync DOB dropdowns to hidden field
+            function syncDOB() {
+                const d = document.getElementById('dobDay').value;
+                const m = document.getElementById('dobMonth').value;
+                const y = document.getElementById('dobYear').value;
+                document.getElementById('dateOfBirth').value = (d && m && y) ? y + '-' + m + '-' + d : '';
+            }
+            document.getElementById('dobDay').addEventListener('change', syncDOB);
+            document.getElementById('dobMonth').addEventListener('change', syncDOB);
+            document.getElementById('dobYear').addEventListener('change', syncDOB);
+
             document.getElementById('stateOfOrigin').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfOrigin'));
             document.getElementById('stateOfResidence').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfResidence'));
             // Review & edit button handlers
@@ -331,7 +377,7 @@
 
         function showConfirmation() {
             const requiredFields = [
-                'surname','firstName','dateOfBirth','nin',
+                'surname','firstName','dobDay','dobMonth','dobYear','nin',
                 'stateOfOrigin','lgaOfOrigin','stateOfResidence',
                 'lgaOfResidence','parentsName','phoneNumber','email',
                 'northEast','northCentral','northWest',
@@ -370,7 +416,12 @@
             document.getElementById('cf-surname').textContent = document.getElementById('surname').value;
             document.getElementById('cf-firstName').textContent = document.getElementById('firstName').value;
             document.getElementById('cf-middleName').textContent = document.getElementById('middleName').value || '-';
-            document.getElementById('cf-dateOfBirth').textContent = document.getElementById('dateOfBirth').value;
+            const dobD = document.getElementById('dobDay').value;
+            const dobM = document.getElementById('dobMonth').options[document.getElementById('dobMonth').selectedIndex].text;
+            const dobY = document.getElementById('dobYear').value;
+            document.getElementById('cf-dateOfBirth').textContent = (dobD && dobM && dobY) 
+                ? dobD + ' ' + dobM + ' ' + dobY 
+                : '-';
             document.getElementById('cf-gender').textContent = document.querySelector('input[name="gender"]:checked').value;
             document.getElementById('cf-nin').textContent = document.getElementById('nin').value;
             document.getElementById('cf-disability').textContent = document.getElementById('disability').value || '-';
