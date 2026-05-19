@@ -1,167 +1,75 @@
-// School data organized by geo-political zones
-const schoolsData = {
-    NORTH_EAST: [
-        "Federal Government College, Buni-Yadi",
-        "Federal Government Girls College, Potiskum",
-        "Federal Government College, Ganye",
-        "Federal Government Girls College, Bauchi",
-        "Federal Government College, Wukari",
-        "Federal Science and Technical College, Lassa",
-        "Federal Science and Technical College, Jalingo",
-        "Federal Government Girls College, Jalingo",
-        "Federal Science and Technical College, Michika",
-        "Federal Government College, Azare",
-        "Federal Government College, Maiduguri",
-        "Federal Government Girls College, Monguno",
-        "Federal Government College, Billiri",
-        "Federal Government College, Bajoga",
-        "Federal Government Girls College, Yola"
-    ],
-    NORTH_CENTRAL: [
-        "Federal Government College, Jos",
-        "Federal Government College, Keffi",
-        "Federal Government Girls College, Rubochi",
-        "Federal Government Girls College, Garki",
-        "Federal Government College, Vandeikya",
-        "Federal Government College, Ugwolawo",
-        "Federal Government College, Minna",
-        "Federal Government College, Suleja",
-        "Federal Government Girls College, Bwari",
-        "Federal Government Girls College, Kabba",
-        "Federal Government Girls College, Omu Aran",
-        "Federal Government College, Ilorin",
-        "Federal Government Girls College, Bida",
-        "Federal Government Girls College, Langtang",
-        "Federal Government Girls College, Abaji",
-        "Federal Government Girls College, Gboko",
-        "Federal Science and Technical College, Orozo",
-        "Federal Science and Technical College Kuta, Shiroro",
-        "Federal Science and Technical College, Otobi",
-        "Federal Government Girls College, New Bussa",
-        "Federal Science and Technical College, Otukpo",
-        "Federal Government College, Kwali",
-        "Federal Government Girls College, Keana",
-        "Federal Science and Technical College, Doma"
-    ],
-    NORTH_WEST: [
-        "Federal Government College Sokoto",
-        "Federal Science College, Sokoto",
-        "Federal Government Girls College, Tambuwal",
-        "Federal Government College, Kano",
-        "Federal Government College, Daura",
-        "Federal Government College, Birnin Yauri",
-        "Federal Government College, Kiyawa",
-        "Federal Government Girls College, Kazaure",
-        "Federal Government Girls College, Minjibir",
-        "Federal Government Girls College, Bakori",
-        "Federal Government Girls College, Gwandu",
-        "Federal Government Girls College, Gusau",
-        "Federal Government College, Anka",
-        "Federal Science and Technical College, Zuru",
-        "Federal Government College, Kaduna",
-        "Federal Government Girls College, Zaria",
-        "Federal Science and Technical College, Kafanchan",
-        "Federal Science and Technical College, Dayi"
-    ],
-    SOUTH_EAST: [
-        "Federal Government College, Ohafia",
-        "Federal Government College, Okposi",
-        "Federal Government Girls College, Onitsha",
-        "Federal Government College, Nise",
-        "Federal Government College, Okigwe",
-        "Federal Government Girls College, Umuahia",
-        "Federal Government College, Enugu",
-        "Federal Government Girls College, Lejja",
-        "Federal Government Girls College, Owerri",
-        "Federal Government Girls College, Ezzamgbo",
-        "Federal Science and Technical College, Awka",
-        "Federal Government College, Ohanso"
-    ],
-    SOUTH_WEST: [
-        "Federal Government College, Odogbolu",
-        "Federal Government College, Ogbomoso",
-        "Federal Government College, Ikirun",
-        "Kings College, Lagos",
-        "Queens College, Lagos",
-        "Federal Government College, Ijanikin",
-        "Federal Government Girls College, Akure",
-        "Federal Government College, Idoani",
-        "Federal Government Girls College, Ipetumodu",
-        "Federal Government Girls College, Oyo",
-        "Federal Government Girls College, Efon Alaye",
-        "Federal Science and Technical College, Yaba",
-        "Federal Science and Technical College, Ilesha",
-        "Federal Government College, Ikole",
-        "Federal Science and Technical College, Usi Ekiti",
-        "Federal Science and Technical College, Ikare Akoko",
-        "Federal Government Girls College, Sagamu"
-    ],
-    SOUTH_SOUTH: [
-        "Federal Science and Technical College, Uromi",
-        "Federal Government College Ikom",
-        "Federal Science College, Ogoja",
-        "Federal Government Girls College, Calabar",
-        "Federal Government Girls College, Ibusa",
-        "Federal Government Girls College, Benin",
-        "Federal Government College, Ibillo",
-        "Federal Government Girls College, Imiringi",
-        "Federal Science and Technical College, Tungbo",
-        "Federal Science and Technical College, Uyo",
-        "Federal Science and Technical College, Ahoada",
-        "Federal Government Girls College, Ikot Obio-Itong",
-        "Federal Government College, Ikot Ekpene",
-        "Federal Government Girls College, Abuloma",
-        "Federal Government College, Warri",
-        "Federal Government College, Odi",
-        "Federal Government College, PortHarcourt"
-    ]
-};
-
-// List of Nigerian states for dropdowns
-const nigerianStates = [
-    "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", 
-    "Borno", "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", 
-    "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi", 
-    "Kogi", "Kwara", "Lagos", "Lafia", "Nasarawa", "Niger", "Ogun", 
-    "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", 
-    "Yobe", "Zamfara", "FCT"
+const lgaData = [
+  {"state": "Adamawa", "lgas": ["Demsa", "Fufure", "Ganye", "Gayuk", "Gombi", "Grie", "Hong", "Jada", "Larmurde", "Madagali", "Maiha", "Mayo Belwa", "Michika", "Mubi North", "Mubi South", "Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"]},
+  {"state": "Akwa Ibom", "lgas": ["Abak", "Eastern Obolo", "Eket", "Esit Eket", "Essien Udim", "Etim Ekpo", "Etinan", "Ibeno", "Ibesikpo Asutan", "Ibiono-Ibom", "Ikot Abasi", "Ika", "Ikono", "Ikot Ekpene", "Ini", "Mkpat-Enin", "Itu", "Mbo", "Nsit-Atai", "Nsit-Ibom", "Nsit-Ubium", "Obot Akara", "Okobo", "Onna", "Oron", "Udung-Uko", "Ukanafun", "Oruk Anam", "Uruan", "Urue-Offong/Oruko", "Uyo"]},
+  {"state": "Anambra", "lgas": ["Aguata", "Anambra East", "Anaocha", "Awka North", "Anambra West", "Awka South", "Ayamelum", "Dunukofia", "Ekwusigo", "Idemili North", "Idemili South", "Ihiala", "Njikoka", "Nnewi North", "Nnewi South", "Ogbaru", "Onitsha North", "Onitsha South", "Orumba North", "Orumba South", "Oyi"]},
+  {"state": "Ogun", "lgas": ["Abeokuta North", "Abeokuta South", "Ado-Odo/Ota", "Egbado North", "Ewekoro", "Egbado South", "Ijebu North", "Ijebu East", "Ifo", "Ijebu Ode", "Ijebu North East", "Imeko Afon", "Ikenne", "Ipokia", "Odeda", "Obafemi Owode", "Odogbolu", "Remo North", "Ogun Waterside", "Shagamu"]},
+  {"state": "Ondo", "lgos": ["Akoko North-East", "Akoko North-West", "Akoko South-West", "Akoko South-East", "Akure North", "Akure South", "Ese Odo", "Idanre", "Ifedore", "Ilaje", "Irele", "Ilejemeje", "Ijero", "Ikere", "Ile Oluji/Okeigbo", "Odigbo", "Okitipupa", "Ondo West", "Ose", "Ondo East", "Owo"]},
+  {"state": "Rivers", "lgos": ["Abua/Odual", "Ahoada East", "Ahoada West", "Andoni", "Akuku-Toru", "Asari-Toru", "Bonny", "Degema", "Emuoha", "Eleme", "Ikwerre", "Etche", "Gokana", "Khana", "Obio/Akpor", "Ogba/Egbema/Ndoni", "Ogu/Bolo", "Okrika", "Omuma", "Opobo/Nkoro", "Oyigbo", "Port Harcourt", "Tai"]},
+  {"state": "Bauchi", "lgos": ["Alkaleri", "Bauchi", "Bogoro", "Damban", "Darazo", "Dass", "Gamawa", "Ganjuwa", "Giade", "Itas/Gadau", "Jama'are", "Katagum", "Kirfi", "Misau", "Ningi", "Shira", "Tafawa Balewa", "Toro", "Warji", "Zaki"]},
+  {"state": "Benue", "lgos": ["Agatu", "Apa", "Ado", "Buruku", "Gboko", "Guma", "Gwer East", "Gwer West", "Katsina-Ala", "Konshisha", "Kwande", "Logo", "Makurdi", "Obi", "Ogbadibo", "Ohimini", "Oju", "Okpokwu", "Oturkpo", "Tarka", "Ukum", "Ushongo", "Vandeikya"]},
+  {"state": "Borno", "lgos": ["Abadam", "Askira/Uba", "Bama", "Bayo", "Biu", "Chibok", "Damboa", "Dikwa", "Guzamala", "Gubio", "Hawul", "Gwoza", "Jere", "Kaga", "Kala/Balge", "Konduga", "Kukawa", "Kwaya Kusar", "Mafa", "Magumeri", "Maiduguri", "Mobbar", "Marte", "Monguno", "Ngala", "Nganzai", "Shani"]},
+  {"state": "Bayelsa", "lgos": ["Brass", "Ekeremor", "Kolokuma/Opokuma", "Nembe", "Ogbia", "Sagbama", "Southern Ijaw", "Yenagoa"]},
+  {"state": "Cross River", "lgos": ["Abi", "Akamkpa", "Akpabuyo", "Bakassi", "Bekwarra", "Biase", "Boki", "Calabar Municipal", "Calabar South", "Etung", "Ikom", "Obanliku", "Obubra", "Obudu", "Odukpani", "Ogoja", "Yakuur", "Yala"]},
+  {"state": "Delta", "lgos": ["Aniocha North", "Aniocha South", "Bomadi", "Burutu", "Ethiope West", "Ethiope East", "Ika North East", "Ika South", "Isoko North", "Isoko South", "Ndokwa East", "Ndokwa West", "Okpe", "Oshimili North", "Oshimili South", "Patani", "Sapele", "Udu", "Ughelli North", "Ukwuani", "Ughelli South", "Uvwie", "Warri North", "Warri South", "Warri South West"]},
+  {"state": "Ebonyi", "lgos": ["Abakaliki", "Afikpo North", "Ebonyi", "Afikpo South", "Ezza North", "Ikwo", "Ezza South", "Ivo", "Ishielu", "Izzi", "Ohaozara", "Ohaukwu", "Onicha"]},
+  {"state": "Edo", "lgos": ["Akoko-Edo", "Egor", "Esan Central", "Esan North-East", "Esan South-East", "Esan West", "Etsako Central", "Etsako East", "Etsako West", "Igueben", "Ikpoba Okha", "Orhionmwon", "Oredo", "Ovia North-East", "Ovia South-West", "Owan East", "Owan West", "Uhunmwonde"]},
+  {"state": "Ekiti", "lgos": ["Ado Ekiti", "Efon", "Ekiti East", "Ekiti South-West", "Ekiti West", "Emure", "Gbonyin", "Ido Osi", "Ijero", "Ikere", "Ilejemeje", "Irepodun/Ifelodun", "Ikole", "Ise/Orun", "Moba", "Oye"]},
+  {"state": "Enugu", "lgos": ["Awgu", "Aninri", "Enugu East", "Enugu North", "Ezeagu", "Enugu South", "Igbo Etiti", "Igbo Eze North", "Igbo Eze South", "Isi Uzo", "Nkanu East", "Nkanu West", "Nsukka", "Udenu", "Oji River", "Uzo Uwani", "Udi"]},
+  {"state": "Federal Capital Territory", "lgos": ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal Area Council"]},
+  {"state": "Gombe", "lgos": ["Akko", "Balanga", "Billiri", "Dukku", "Funakaye", "Gombe", "Kaltungo", "Kwami", "Nafada", "Shongom", "Yamaltu/Deba"]},
+  {"state": "Jigawa", "lgos": ["Auyo", "Babura", "Buji", "Biriniwa", "Birnin Kudu", "Dutse", "Gagarawa", "Garki", "Gumel", "Guri", "Gwaram", "Gwiwa", "Hadejia", "Jahun", "Kafin Hausa", "Kazaure", "Kigo", "Kiri Kasama", "Kiyawa", "Kaugama", "Maigatari", "Malam Madori", "Miga", "Sule Tankarkar", "Roni", "Ringim", "Yankwashi", "Taura"]},
+  {"state": "Oyo", "lgos": ["Afijio", "Akinyele", "Atiba", "Atisbo", "Egbeda", "Ibadan North", "Ibadan North-East", "Ibadan North-West", "Ibadan South-East", "Ibarapa Central", "Ibadan South-West", "Ibarapa East", "Ido", "Ibarapa North", "Irepo", "Iseyin", "Itesiwaju", "Iwajawa", "Kajola", "Lagelu", "Ogbomosho North", "Ogbomosho South", "Ogo Oluwa", "Olorunsogo", "Oluyole", "Ona Ara", "Orelope", "Ori Ire", "Oyo", "Oyo East", "Saki East", "Saki West", "Surulere Oyo State"]},
+  {"state": "Imo", "lgos": ["Aboh Mbaise", "Ahiazu Mbaise", "Ehime Mbano", "Ezinihitte", "Ideato North", "Ideato South", "Ihitte/Uboma", "Ikeduru", "Isiala Mbano", "Mbaitoli", "Isu", "Ngor Okpala", "Njaba", "Nkwerre", "Nwangele", "Obowo", "Oguta", "Ohaji/Egbema", "Okigwe", "Orlu", "Orsu", "Oru East", "Oru West", "Owerri Municipal", "Owerri North", "Unuimo", "Owerri West"]},
+  {"state": "Kaduna", "lgos": ["Birnin Gwari", "Chikun", "Giwa", "Ikara", "Igabi", "Jaba", "Jema'a", "Kachia", "Kaduna North", "Kaduna South", "Kagarko", "Kajuru", "Kaura", "Kauru", "Kubau", "Kudan", "Lere", "Makarfi", "Sabon Gari", "Sanga", "Soba", "Zangon Kataf", "Zaria"]},
+  {"state": "Kebbi", "lgos": ["Aleiro", "Argungu", "Arewa Dandi", "Augie", "Bagudo", "Birnin Kebbi", "Bunza", "Dandi", "Fakai", "Gwandu", "Jega", "Kalgo", "Koko/Besse", "Maiyama", "Ngaski", "Shanga", "Suru", "Sakaba", "Wasagu/Danko", "Yauri", "Zuru"]},
+  {"state": "Kano", "lgos": ["Ajingi", "Albasu", "Bagwai", "Bebeji", "Bichi", "Bunkure", "Dala", "Dambatta", "Dawakin Kudu", "Dawakin Tofa", "Doguwa", "Fagge", "Gabasawa", "Garko", "Garun Mallam", "Gezawa", "Gaya", "Gwale", "Gwarzo", "Kabo", "Kano Municipal", "Karaye", "Kibiya", "Kiru", "Kumbotso", "Kunchi", "Kura", "Madobi", "Makoda", "Minjibir", "Nasarawa", "Rano", "Rimin Gado", "Rogo", "Shanono", "Takai", "Sumaila", "Tarauni", "Tofa", "Tsanyawa", "Tudun Wada", "Ungogo", "Warawa", "Wudil"]},
+  {"state": "Kogi", "lgos": ["Ajaokuta", "Adavi", "Ankpa", "Bassa", "Dekina", "Ibaji", "Idah", "Igalamela Odolu", "Ijumu", "Kogi", "Kabba/Bunu", "Lokoja", "Ofu", "Mopa Muro", "Ogori/Magongo", "Okehi", "Okene", "Olorunsogo", "Omala", "Yagba East", "Yagba West"]},
+  {"state": "Osun", "lgos": ["Aiyedire", "Atakunmosa West", "Atakunmosa East", "Aiyedaade", "Boluwaduro", "Boripe", "Ife East", "Ede South", "Ife North", "Ede North", "Ife South", "Ejigbo", "Ife Central", "Ifedayo", "Egbedore", "Ila", "Ifelodun", "Ilesa East", "Ilesa West", "Irepodun", "Irewole", "Isokan", "Iwo", "Obokun", "Odo Otin", "Ola Oluwa", "Olorunda", "Oriade", "Orolu", "Osogbo"]},
+  {"state": "Sokoto", "lgos": ["Gudu", "Gwadabawa", "Illela", "Isa", "Kebbe", "Kware", "Rabah", "Sabon Birni", "Shagari", "Silame", "Sokoto North", "Sokoto South", "Tambuwal", "Tangaza", "Tureta", "Wamako", "Wurno", "Yabo", "Binji", "Bodinga", "Dange Shuni", "Goronyo", "Gada"]},
+  {"state": "Plateau", "lgos": ["Bokkos", "Barkin Ladi", "Bassa", "Jos East", "Jos North", "Jos South", "Kanam", "Kanke", "Langtang South", "Langtang North", "Mangu", "Mikang", "Pankshin", "Qua'an Pan", "Riyom", "Shendam", "Wase"]},
+  {"state": "Taraba", "lgos": ["Ardo Kola", "Bali", "Donga", "Gashaka", "Gassol", "Ibi", "Jalingo", "Karim Lamido", "Kumi", "Lau", "Sardauna", "Takum", "Ussa", "Wukari", "Yorro", "Zing"]},
+  {"state": "Yobe", "lgos": ["Bade", "Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"]},
+  {"state": "Zamfara", "lgos": ["Anka", "Birnin Magaji/Kiyaw", "Bakura", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Shinkafi", "Maru", "Talata Mafara", "Tsafe", "Zurmi"]},
+  {"state": "Lagos", "lgos": ["Agege", "Ajeromi-Ifelodun", "Alimosho", "Amuwo-Odofin", "Badagry", "Apapa", "Epe", "Eti Osa", "Ibeju-Lekki", "Ifako-Ijaiye", "Ikeja", "Ikorodu", "Kosofe", "Lagos Island", "Mushin", "Lagos Mainland", "Ojo", "Oshodi-Isolo", "Shomolu", "Surulere Lagos State"]},
+  {"state": "Katsina", "lgos": ["Bakori", "Batagarawa", "Batsari", "Baure", "Bindawa", "Charanchi", "Danja", "Dandume", "Dan Musa", "Daura", "Dutsi", "Dutsin Ma", "Faskari", "Funtua", "Ingawa", "Jibia", "Kafur", "Kaita", "Kankara", "Kankia", "Katsina", "Kurfi", "Kusada", "Mai'Adua", "Malumfashi", "Mani", "Mashi", "Matazu", "Musawa", "Rimi", "Sabuwa", "Safana", "Sandamu", "Zango"]},
+  {"state": "Kwara", "lgos": ["Asa", "Baruten", "Edu", "Ilorin East", "Ifelodun", "Ilorin South", "Ekiti Kwara State", "Ilorin West", "Irepodun", "Isin", "Kaiama", "Moro", "Offa", "Oke Ero", "Oyun", "Pategi"]},
+  {"state": "Nasarawa", "lgos": ["Akwanga", "Awe", "Doma", "Karu", "Keana", "Keffi", "Lafia", "Kokona", "Nasarawa Egon", "Nasarawa", "Obi", "Toto", "Wamba"]},
+  {"state": "Niger", "lgos": ["Agaie", "Agwara", "Bida", "Borgu", "Bosso", "Chanchaga", "Edati", "Gbako", "Gurara", "Katcha", "Kontagora", "Lapai", "Lavun", "Mariga", "Magama", "Mokwa", "Mashegu", "Moya", "Paikoro", "Rafi", "Rijau", "Shiroro", "Suleja", "Tafa", "Wushishi"]},
+  {"state": "Abia", "lgos": ["Aba North", "Arochukwu", "Aba South", "Bende", "Isiala Ngwa North", "Ikwuano", "Isiala Ngwa South", "Isuikwuato", "Obi Ngwa", "Ohafia", "Osisioma", "Ugwunagbo", "Ukwa East", "Ukwa West", "Umuahia North", "Umuahia South", "Umu Nneochi"]}
 ];
-
-// Function to populate select dropdowns with schools
-function populateSchoolDropdowns() {
-    const selects = {
-        'northEast': schoolsData.NORTH_EAST,
-        'northCentral': schoolsData.NORTH_CENTRAL,
-        'northWest': schoolsData.NORTH_WEST,
-        'southEast': schoolsData.SOUTH_EAST,
-        'southWest': schoolsData.SOUTH_WEST,
-        'southSouth': schoolsData.SOUTH_SOUTH
-    };
-
-    for (const [selectId, schools] of Object.entries(selects)) {
-        const select = document.getElementById(selectId);
-        schools.forEach(school => {
-            const option = document.createElement('option');
-            option.value = school;
-            option.textContent = school;
-            select.appendChild(option);
-        });
-    }
-}
 
 function populateStateDropdowns() {
     const select = document.getElementById('stateOfOrigin');
-    if (select) {
-        nigerianStates.forEach(state => {
+    if (!select) return;
+    lgaData.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.state;
+        option.textContent = item.state;
+        select.appendChild(option);
+    });
+}
+
+function populateLgas(stateName, lgaSelectId) {
+    const lgaSelect = document.getElementById(lgaSelectId);
+    if (!lgaSelect) return;
+    lgaSelect.innerHTML = '<option value="">LGA of Origin *</option>';
+    const stateData = lgaData.find(item => item.state === stateName);
+    if (stateData && stateData.lgos) {
+        stateData.lgos.forEach(lga => {
             const option = document.createElement('option');
-            option.value = state;
-            option.textContent = state;
-            select.appendChild(option);
+            option.value = lga;
+            option.textContent = lga;
+            lgaSelect.appendChild(option);
         });
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    populateSchoolDropdowns();
     populateStateDropdowns();
+    document.getElementById('stateOfOrigin')?.addEventListener('change', function() {
+        populateLgas(this.value, 'lgaOfOrigin');
+    });
+    document.getElementById('stateOfResidence')?.addEventListener('change', function() {
+        populateLgas(this.value, 'lgaOfResidence');
+    });
 });

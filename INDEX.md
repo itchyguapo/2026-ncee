@@ -61,7 +61,7 @@ permalink: /
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <select name="stateOfOrigin" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required id="stateOfOrigin"><option value="">State of Origin *</option></select>
-                    <input type="text" name="lgaOfOrigin" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="LGA of Origin *" required id="lgaOfOrigin">
+                    <select name="lgaOfOrigin" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required id="lgaOfOrigin"><option value="">LGA of Origin *</option></select>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@ permalink: /
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <select name="stateOfResidence" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required id="stateOfResidence"><option value="">State of Residence *</option></select>
-                    <input type="text" name="lgaOfResidence" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="LGA of Residence *" required id="lgaOfResidence">
+                    <select name="lgaOfResidence" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required id="lgaOfResidence"><option value="">LGA of Residence *</option></select>
                 </div>
             </div>
 
