@@ -202,7 +202,7 @@
 
                 <div class="flex gap-4">
                     <button type="button" id="editBtn" class="flex-1 px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-light transition-all">Edit Details</button>
-                    <button type="button" onclick="submitForm()" class="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all">Confirm & Submit</button>
+                    <button type="button" onclick="submitForm(event)" class="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all">Confirm & Submit</button>
                 </div>
                 <div id="errorMessage" class="text-red-500 text-center hidden mt-2"></div>
             </div>
@@ -369,11 +369,13 @@
 
         async function submitForm() {
             const form = document.getElementById('registrationForm');
-            const submitBtn = document.querySelector('button[type="submit"]');
+            const submitBtn = event ? event.target : document.querySelector('#confirmationView button[type="button"]:last-of-type');
             const errorMsg = document.getElementById('errorMessage');
             
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting... Please wait';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting... Please wait';
+            }
             errorMsg.classList.add('hidden');
 
             const formData = new FormData(form);
@@ -398,8 +400,10 @@
                 errorMsg.textContent = 'Submission failed. Please try again.';
                 errorMsg.classList.remove('hidden');
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Confirm & Submit';
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Confirm & Submit';
+                }
             }
         }
 
