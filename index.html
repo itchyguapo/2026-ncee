@@ -306,6 +306,7 @@
             populateSchools();
             document.getElementById('stateOfOrigin').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfOrigin'));
             document.getElementById('stateOfResidence').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfResidence'));
+            // Review & edit button handlers
             document.getElementById('reviewBtn').addEventListener('click', showConfirmation);
             document.getElementById('editBtn').addEventListener('click', editDetails);
         });
