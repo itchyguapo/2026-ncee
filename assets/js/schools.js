@@ -1,15 +1,67 @@
 const LGA_API_URL = 'https://gist.githubusercontent.com/devhammed/0bb9eeac9ff22c895100d072f489dc98/raw';
 
 let lgaData = [];
+let stateToZoneMap = {};
+
+const STATE_ZONE_MAP = {
+    "Adamawa": "northEast",
+    "Akwa Ibom": "southSouth",
+    "Anambra": "southEast",
+    "Bauchi": "northEast",
+    "Bayelsa": "southSouth",
+    "Benue": "northCentral",
+    "Borno": "northEast",
+    "Cross River": "southSouth",
+    "Delta": "southSouth",
+    "Ebonyi": "southEast",
+    "Edo": "southSouth",
+    "Ekiti": "southWest",
+    "Enugu": "southEast",
+    "Federal Capital Territory": "northCentral",
+    "Gombe": "northEast",
+    "Imo": "southEast",
+    "Jigawa": "northWest",
+    "Kaduna": "northWest",
+    "Kano": "northWest",
+    "Katsina": "northWest",
+    "Kebbi": "northWest",
+    "Kogi": "northCentral",
+    "Kwara": "northCentral",
+    "Lagos": "southWest",
+    "Nasarawa": "northCentral",
+    "Niger": "northCentral",
+    "Ogun": "southWest",
+    "Ondo": "southWest",
+    "Osun": "southWest",
+    "Oyo": "southWest",
+    "Plateau": "northCentral",
+    "Rivers": "southSouth",
+    "Sokoto": "northWest",
+    "Taraba": "northEast",
+    "Yobe": "northEast",
+    "Zamfara": "northWest"
+};
 
 async function fetchLgaData() {
     try {
         const response = await fetch(LGA_API_URL);
         lgaData = await response.json();
         populateStateDropdowns();
+        buildStateToZoneMap();
     } catch (error) {
         console.error('Failed to fetch LGA data:', error);
     }
+}
+
+function buildStateToZoneMap() {
+    stateToZoneMap = {};
+    lgaData.forEach(item => {
+        stateToZoneMap[item.state] = STATE_ZONE_MAP[item.state] || null;
+    });
+}
+
+function getStateZone(stateName) {
+    return stateToZoneMap[stateName] || STATE_TO_ZONE[stateName] || null;
 }
 
 function populateStateDropdowns() {
@@ -84,6 +136,13 @@ function populateAllSchoolDropdowns() {
             }
         }
     });
+}
+
+function handleStateChange(stateName, zoneFieldId) {
+    const zone = getZoneFromState(stateName);
+    if (zone && zoneFieldId) {
+        populateSchoolsByZone(zone, zoneFieldId);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
