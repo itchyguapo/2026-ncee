@@ -60,11 +60,28 @@ function getZoneFromState(stateName) {
 }
 
 function populateAllSchoolDropdowns() {
-    const schoolSelects = ['northEast', 'northCentral', 'northWest', 'southEast', 'southSouth', 'southWest'];
-    schoolSelects.forEach(selectId => {
+    const zoneSelects = {
+        northEast: 'northEast',
+        northCentral: 'northCentral',
+        northWest: 'northWest',
+        southEast: 'southEast',
+        southSouth: 'southSouth',
+        southWest: 'southWest'
+    };
+    
+    Object.keys(zoneSelects).forEach(zone => {
+        const selectId = zoneSelects[zone];
         const select = document.getElementById(selectId);
         if (select) {
             select.innerHTML = '<option value="">Select School *</option>';
+            if (SCHOOL_DATA[zone]) {
+                SCHOOL_DATA[zone].forEach(school => {
+                    const option = document.createElement('option');
+                    option.value = school;
+                    option.textContent = school;
+                    select.appendChild(option);
+                });
+            }
         }
     });
 }
