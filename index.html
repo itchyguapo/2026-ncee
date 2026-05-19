@@ -50,7 +50,8 @@
                 </div>
             </div>
 
-            <form action="https://formspree.io/f/xwvzpqab" method="POST" class="bg-white rounded-xl shadow-2xl p-8 space-y-6" id="registrationForm" enctype="multipart/form-data">
+            <form class="bg-white rounded-xl shadow-2xl p-8 space-y-6" id="registrationForm" enctype="multipart/form-data">
+                <input type="hidden" name="form-name" value="ncee-registration-2026" />
                 <div class="space-y-6">
                     <h2 class="text-2xl font-bold text-dark border-b-2 border-primary pb-3 flex items-center">
                         <i class="fas fa-user mr-3 text-primary"></i>Personal Information
@@ -201,8 +202,9 @@
 
                 <div class="flex gap-4">
                     <button type="button" id="editBtn" class="flex-1 px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-light transition-all">Edit Details</button>
-                    <button type="submit" form="registrationForm" class="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all">Confirm & Submit</button>
+                    <button type="button" onclick="submitForm()" class="flex-1 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all">Confirm & Submit</button>
                 </div>
+                <div id="errorMessage" class="text-red-500 text-center hidden mt-2"></div>
             </div>
 
             <div class="mt-8 text-center">
@@ -364,6 +366,47 @@
             document.getElementById('confirmationView').classList.add('hidden');
             document.getElementById('registrationForm').classList.remove('hidden');
         }
+
+        async function submitForm() {
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting... Please wait';
+            errorMsg.classList.add('hidden');
+
+            const formData = new FormData(form);
+            formData.append('form-name', 'ncee-registration-2026');
+
+            try {
+                const response = await fetch('https://formspree.io/f/xwvzpqab', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Registration submitted successfully!');
+                    form.reset();
+                    document.getElementById('confirmationView').classList.add('hidden');
+                    document.getElementById('registrationForm').classList.remove('hidden');
+                    document.getElementById('passportPreview').innerHTML = '';
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Submission failed. Please try again.';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm & Submit';
+            }
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', e => {
+            e.preventDefault();
+            submitForm();
+        });
     </script>
 </body>
 </html>
