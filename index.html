@@ -306,6 +306,8 @@
             populateSchools();
             document.getElementById('stateOfOrigin').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfOrigin'));
             document.getElementById('stateOfResidence').addEventListener('change', e => populateLGA(e.target.value, 'lgaOfResidence'));
+            document.getElementById('reviewBtn').addEventListener('click', showConfirmation);
+            document.getElementById('editBtn').addEventListener('click', editDetails);
         });
 
         function previewPassport(input) {
@@ -361,9 +363,6 @@
             document.getElementById('confirmationView').classList.add('hidden');
             document.getElementById('registrationForm').classList.remove('hidden');
         }
-
-        document.getElementById('reviewBtn').addEventListener('click', showConfirmation);
-        document.getElementById('editBtn').addEventListener('click', editDetails);
     </script>
 </body>
 </html>
