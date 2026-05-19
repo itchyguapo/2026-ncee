@@ -48,9 +48,10 @@ permalink: /
                 <div class="space-y-2">
                     <label class="block text-sm font-medium text-gray-700">Passport Photo *</label>
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-                        <input type="file" name="passportPhoto" accept="image/jpeg,image/png,image/jpg" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <input type="file" name="passportPhoto" accept="image/jpeg,image/png,image/jpg" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" id="passportInput" onchange="previewPassport(this)">
                         <p class="text-xs text-gray-500 mt-1">JPEG/PNG only, max 5MB</p>
                     </div>
+                    <div id="passportPreview" class="mt-2 flex justify-center"></div>
                 </div>
             </div>
 

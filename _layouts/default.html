@@ -26,5 +26,22 @@
     {{ content }}
     <script src="{{ '/assets/js/schools.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/app.js' | relative_url }}"></script>
+    <script>
+        function previewPassport(input) {
+            const preview = document.getElementById('passportPreview');
+            preview.innerHTML = '';
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'max-h-48 rounded-lg shadow-md';
+                    img.alt = 'Passport Preview';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </body>
 </html>
